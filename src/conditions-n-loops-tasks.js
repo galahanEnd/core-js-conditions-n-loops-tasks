@@ -346,12 +346,28 @@ function isContainNumber(num, digit) {
  */
 function getBalanceIndex(arr) {
   let len = 0;
+  let sum = 0;
+  let i = 0;
+
   while (arr[len] !== undefined) {
     len += 1;
   }
-  for (let i = 0; i < len; i += 1) {
-    
+
+  for (i = 0; i < len; i += 1) {
+    sum += arr[i];
   }
+
+  let leftSum = 0;
+  let rightSum = 0;
+
+  for (i = 0; i < len; i += 1) {
+    rightSum = sum - leftSum - arr[i];
+
+    if (rightSum === leftSum) return i;
+
+    leftSum += arr[i];
+  }
+  return -1;
 }
 
 /**
@@ -375,8 +391,25 @@ function getBalanceIndex(arr) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const matrix = [];
+  for (let i = 0; i < size; i += 1) {
+    matrix[i] = [];
+    for (let j = 0; j < size; j += 1) {
+      matrix[i][j] = 0;
+    }
+  }
+  let right = size - 1;
+  let left = 0;
+  let bot = size - 1;
+  let top = 0;
+  let counter = 1;
+
+  while (left <= right && top <= bot) {
+    
+  }
+
+  return matrix;
 }
 
 /**
