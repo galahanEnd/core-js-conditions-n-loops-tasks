@@ -406,7 +406,33 @@ function getSpiralMatrix(size) {
   let counter = 1;
 
   while (left <= right && top <= bot) {
-    
+    for (let i = left; i <= right; i += 1) {
+      matrix[top][i] = counter;
+      counter += 1;
+    }
+    top += 1;
+
+    for (let i = top; i <= bot; i += 1) {
+      matrix[i][right] = counter;
+      counter += 1;
+    }
+    right -= 1;
+
+    if (right >= left) {
+      for (let i = right; i >= left; i -= 1) {
+        matrix[bot][i] = counter;
+        counter += 1;
+      }
+      bot -= 1;
+    }
+
+    if (bot >= top) {
+      for (let i = bot; i >= top; i -= 1) {
+        matrix[i][left] = counter;
+        counter += 1;
+      }
+      left += 1;
+    }
   }
 
   return matrix;
@@ -427,7 +453,7 @@ function getSpiralMatrix(size) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
+function rotateMatrix(matrix) {
   throw new Error('Not implemented');
 }
 
