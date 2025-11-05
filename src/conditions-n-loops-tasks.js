@@ -454,7 +454,26 @@ function getSpiralMatrix(size) {
  *  ]                 ]
  */
 function rotateMatrix(matrix) {
-  throw new Error('Not implemented');
+  const inMatrix = matrix;
+  let len = 0;
+  while (inMatrix[len] !== undefined) {
+    len += 1;
+  }
+  for (let i = 0; i < len; i += 1) {
+    for (let j = i + 1; j < len; j += 1) {
+      const swap = inMatrix[i][j];
+      inMatrix[i][j] = inMatrix[j][i];
+      inMatrix[j][i] = swap;
+    }
+  }
+  for (let i = 0; i < len; i += 1) {
+    for (let j = 0; j < len / 2; j += 1) {
+      const swap = inMatrix[i][j];
+      inMatrix[i][j] = inMatrix[i][len - j - 1];
+      inMatrix[i][len - j - 1] = swap;
+    }
+  }
+  return inMatrix;
 }
 
 /**
@@ -471,8 +490,26 @@ function rotateMatrix(matrix) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
+function sortByAsc(arr) {
+  let len = 0;
+  const arrIn = arr;
+  while (arrIn[len] !== undefined) {
+    len += 1;
+  }
+
+  while (true) {
+    let lastSwap = 0;
+    for (let i = 0; i < len - 1; i += 1) {
+      if (arrIn[i] > arrIn[i + 1]) {
+        const swap = arrIn[i + 1];
+        arrIn[i + 1] = arrIn[i];
+        arrIn[i] = swap;
+        lastSwap = i + 1;
+      }
+    }
+    if (lastSwap === 0) return arrIn;
+    len = lastSwap;
+  }
 }
 
 /**
@@ -492,8 +529,21 @@ function sortByAsc(/* arr */) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(/* str, iterations */) {
-  throw new Error('Not implemented');
+function shuffleChar(str, iterations) {
+  const len = str.length;
+  if (iterations === 0 || (len % 2 !== 0 && len > 3)) return str;
+
+  let res = str;
+  for (let k = 0; k < iterations; k += 1) {
+    let newStr = '';
+    for (let i = 0; i < len; i += 1) {
+      const index =
+        i % 2 === 0 ? i / 2 : Math.floor(len / 2) + Math.floor(i / 2);
+      newStr += res[index];
+    }
+    res = newStr;
+  }
+  return res;
 }
 
 /**
@@ -514,7 +564,7 @@ function shuffleChar(/* str, iterations */) {
  * 321321   => 322113
  *
  */
-function getNearestBigger(/* number */) {
+function getNearestBigger(number) {
   throw new Error('Not implemented');
 }
 
